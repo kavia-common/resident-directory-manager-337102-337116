@@ -1,0 +1,177 @@
+.directory-page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 64px);
+  position: relative;
+  overflow: hidden;
+}
+
+.directory-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sidebar-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.directory-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.directory-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 16px;
+  flex-shrink: 0;
+}
+
+.resident-count {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.btn-icon-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+
+.btn-icon-text:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.directory-scroll {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--color-bg);
+}
+
+/* Floating Action Button */
+.fab {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #ffffff;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(6, 95, 70, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 50;
+}
+
+.fab:hover {
+  background: #047857;
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(6, 95, 70, 0.5);
+}
+
+.fab:active {
+  transform: scale(0.96);
+}
+
+/* Mobile sidebar toggle */
+.sidebar-toggle-btn {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  background: var(--color-surface);
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .directory-page {
+    height: auto;
+    min-height: calc(100vh - 64px);
+    overflow: visible;
+  }
+
+  .directory-layout {
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .sidebar-wrapper {
+    height: auto;
+    overflow: visible;
+    display: none;
+  }
+
+  .sidebar-wrapper.sidebar-open {
+    display: block;
+  }
+
+  .sidebar-toggle-btn {
+    display: flex;
+  }
+
+  .directory-scroll {
+    overflow: visible;
+  }
+
+  .directory-main {
+    overflow: visible;
+  }
+
+  .fab {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .btn-label {
+    display: none;
+  }
+
+  .topbar-actions {
+    padding: 0 10px;
+  }
+}

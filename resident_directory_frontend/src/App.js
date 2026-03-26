@@ -1,48 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 
+import { ResidentProvider } from './context/ResidentContext';
+import Navbar from './components/Navbar';
+import DirectoryPage from './pages/DirectoryPage';
+import ResidentProfilePage from './pages/ResidentProfilePage';
+
 // PUBLIC_INTERFACE
+/**
+ * App - Root component of the Resident Directory application.
+ * Sets up React Router, global state provider (ResidentProvider),
+ * and defines the application routing structure.
+ *
+ * Routes:
+ *   /             -> DirectoryPage  (main resident list with filters/search)
+ *   /resident/:id -> ResidentProfilePage  (individual resident profile)
+ */
 function App() {
-  const [theme, setTheme] = useState('light');
-
-  // Effect to apply theme to document element
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ResidentProvider>
+      <Router>
+        <div className="app-shell">
+          {/* Accessibility: skip to main content */}
+          <a href="#main-content" className="skip-link">
+            Skip to main content
+          </a>
+
+          {/* Top navigation bar */}
+          <Navbar />
+
+          {/* Page content */}
+          <div id="main-content" className="app-content">
+            <Routes>
+              <Route path="/" element={<DirectoryPage />} />
+              <Route path="/resident/:id" element={<ResidentProfilePage />} />
+              {/* Fallback: redirect unknown routes to directory */}
+              <Route path="*" element={<DirectoryPage />} />
+            </Routes>
+          </div>
+        </div>
+      </Router>
+    </ResidentProvider>
   );
 }
 

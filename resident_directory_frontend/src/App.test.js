@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders the Resident Directory app', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  // The navbar title should be present
+  const titleElement = screen.getByText(/Resident Directory/i);
+  expect(titleElement).toBeInTheDocument();
 });
